@@ -1,17 +1,17 @@
 # Reletter MCP Server
 
-Give AI agents and LLMs access to newsletter data from [Reletter](https://reletter.com) — search 6M+ email newsletters, fetch metadata, contacts, issues, and chart rankings.
+Give AI agents and LLMs access to newsletter data from [Reletter](https://reletter.com). Search 6M+ email newsletters across **Substack**, **LinkedIn**, **Ghost**, and more. Fetch metadata, contacts, issues, and chart rankings.
 
 This is a remote Model Context Protocol (MCP) server that connects AI assistants like Claude, ChatGPT, and Cursor to the [Reletter API](https://reletter.com/developers).
 
 ## Use cases
 
-- **Read and analyze newsletter issues** — pull the full body text of any indexed issue
-- **Search and discover newsletters** — find shows by topic, category, or audience size
-- **Research newsletters for guest pitching** — see subscriber estimates and contact details without leaving your AI workflow
-- **Monitor brand mentions** — track when your brand, competitors, or clients are mentioned across newsletters
+- **Read and analyze newsletter issues** — pull the full body text of any indexed issue into your AI workflow
+- **Search and discover newsletters** — find newsletters by topic, platform, or audience size
+- **Find newsletters to pitch** — get your product, tool, or book featured. Filter by audience size, topic, or platform, then pull verified contact emails in one pass
+- **Build sponsorship, cross-promotion, and PR target lists** — pull verified contacts and export them to your CRM
+- **Monitor brand or keyword mentions** — track when your brand, competitors, or clients are mentioned across newsletters
 - **Track chart rankings** — daily Substack / LinkedIn / Reletter chart data
-- **Build media lists** — pull verified email contacts, social accounts, and contributor info at scale
 
 ## Tools
 
