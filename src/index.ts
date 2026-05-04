@@ -41,7 +41,7 @@ export class MyMCP extends McpAgent<Env, Record<string, never>, Props> {
 		// 1. Search publications
 		this.server.tool(
 			"search_publications",
-			"Search for newsletters by topic, title, or author with advanced filters. Returns subscriber estimates per publication. Specify either `query` or `filters` or both. Filters are comma-separated, e.g. `subscribers:gte:5000,active:is:true`.",
+			"Search for newsletters by topic, title, or author with advanced filters. Returns subscriber numbers per publication. Specify either `query` or `filters` or both. Filters are comma-separated, e.g. `subscribers:gte:5000,active:is:true`.",
 			{
 				query: z.string().optional().describe("Search query. Supports parentheses for grouping, quotes for exact match, AND, OR and -negation."),
 				mode: z.enum(["topics", "titles", "authors"]).optional().describe("Search mode. Default: topics."),
@@ -69,7 +69,7 @@ export class MyMCP extends McpAgent<Env, Record<string, never>, Props> {
 				per_page: z.number().optional().describe("Results per page, max 100. Default: 50."),
 				page: z.number().optional().describe("Page number, starts at 1."),
 				filters: z.string().optional().describe("Advanced search filters, comma-separated."),
-				highlight: z.boolean().optional().describe("If true, query matches are returned with HTML <em> tags."),
+				highlight: z.boolean().optional().describe("If true, the response includes a `highlight` field per issue with query matches wrapped in HTML <b> tags."),
 				publication_id: z.string().optional().describe("Scope results to a single publication by its Reletter ID."),
 				threshold: z.number().optional().describe("Only return issues published within the last N seconds."),
 			},
@@ -114,18 +114,12 @@ export class MyMCP extends McpAgent<Env, Record<string, never>, Props> {
 		// 5. List issues for a publication
 		this.server.tool(
 			"list_issues",
-			"List recent issues for a publication in chronological order.",
+			"List the 100 most recent issues for a publication in reverse chronological order.",
 			{
 				publication_id: z.string().describe("The Reletter publication ID."),
-				per_page: z.number().optional().describe("Results per page, max 100. Default: 25."),
-				page: z.number().optional().describe("Page number, starts at 1."),
 			},
-			async ({ publication_id, per_page, page }) => {
-				return this.apiFetch("/api/issues/", {
-					publication_id,
-					per_page: per_page?.toString(),
-					page: page?.toString(),
-				});
+			async ({ publication_id }) => {
+				return this.apiFetch("/api/issues/", { publication_id });
 			},
 		);
 
