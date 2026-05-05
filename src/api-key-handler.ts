@@ -281,6 +281,8 @@ function renderApiKeyForm(
 			</form>
 			<div class="help">
 				<a href="https://reletter.com/developers" target="_blank" rel="noopener noreferrer">Get an API key</a>
+				&nbsp;·&nbsp;
+				<a href="https://reletter.com/llms-full.txt" target="_blank" rel="noopener noreferrer">Buy programmatically (HTTP 402)</a>
 			</div>
 		</div>
 	</div>

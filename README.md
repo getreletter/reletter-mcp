@@ -32,6 +32,8 @@ This is a remote Model Context Protocol (MCP) server that connects AI assistants
 
 You need a Reletter API key. [Get one here](https://reletter.com/developers).
 
+For autonomous agents that want to provision a key without a human in the loop, Reletter implements the [Machine Payments Protocol](https://mpp.dev). Hit `POST https://api.reletter.com/api/payments/buy/` to get a 402 challenge, pay with a Stripe Shared Payment Token or with USDC on Tempo, and the response carries an API key tied to a freshly-provisioned account. Current bundle tiers: `GET https://api.reletter.com/api/payments/bundles/`. See https://reletter.com/llms-full.txt for the full flow.
+
 ### ChatGPT
 
 1. Go to **Settings** → **Apps** → **Advanced settings** and enable **Developer mode**
