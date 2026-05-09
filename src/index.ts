@@ -41,13 +41,13 @@ export class MyMCP extends McpAgent<Env, Record<string, never>, Props> {
 		// 1. Search publications
 		this.server.tool(
 			"search_publications",
-			"Search for newsletters by topic, title, or author with advanced filters. Returns subscriber numbers per publication. Specify either `query` or `filters` or both. Filters are comma-separated, e.g. `subscribers:gte:5000,active:is:true`.",
+			"Search for newsletters by topic, title, or author across Substack, LinkedIn, Ghost, Beehiiv and Kit. Returns subscriber numbers per publication. Specify either `query` or `filters` or both. Filters are comma-separated, e.g. `subscribers:gte:5000,active:is:true,platforms:any:substack-beehiiv-kit`. Full filter reference: https://reletter.com/developers/search-filters",
 			{
 				query: z.string().optional().describe("Search query. Supports parentheses for grouping, quotes for exact match, AND, OR and -negation."),
 				mode: z.enum(["topics", "titles", "authors"]).optional().describe("Search mode. Default: topics."),
 				per_page: z.number().optional().describe("Results per page, max 100. Default: 50."),
 				page: z.number().optional().describe("Page number, starts at 1."),
-				filters: z.string().optional().describe("Advanced search filters, comma-separated. E.g. `subscribers:gte:5000,active:is:true`."),
+				filters: z.string().optional().describe("Advanced search filters, comma-separated, e.g. `subscribers:gte:5000,active:is:true,languages:any:en,platforms:any:substack-beehiiv-kit`. See https://reletter.com/developers/search-filters for the full list."),
 			},
 			async ({ query, mode, per_page, page, filters }) => {
 				return this.apiFetch("/api/search/publications/", {
@@ -63,15 +63,15 @@ export class MyMCP extends McpAgent<Env, Record<string, never>, Props> {
 		// 2. Search issues
 		this.server.tool(
 			"search_issues",
-			"Search across the body and titles of every newsletter issue Reletter has indexed. Returns highlighted snippets when `highlight=true`.",
+			"Search across the body and titles of every newsletter issue Reletter has indexed. Returns highlighted snippets when `highlight=true`. Accepts the same `filters` parameter as search_publications; filters apply to the parent publication.",
 			{
 				query: z.string().optional().describe("Search query. Supports parentheses, quotes, AND, OR and -negation."),
 				per_page: z.number().optional().describe("Results per page, max 100. Default: 50."),
 				page: z.number().optional().describe("Page number, starts at 1."),
-				filters: z.string().optional().describe("Advanced search filters, comma-separated."),
+				filters: z.string().optional().describe("Same syntax and filter set as search_publications; filters apply to the parent publication, e.g. `subscribers:gte:5000,languages:any:en`. See https://reletter.com/developers/search-filters."),
 				highlight: z.boolean().optional().describe("If true, the response includes a `highlight` field per issue with query matches wrapped in HTML <b> tags."),
 				publication_id: z.string().optional().describe("Scope results to a single publication by its Reletter ID."),
-				threshold: z.number().optional().describe("Only return issues published within the last N seconds."),
+				threshold: z.number().optional().describe("Only return issues published within the last N seconds (max 1209600 = 14 days)."),
 			},
 			async ({ query, per_page, page, filters, highlight, publication_id, threshold }) => {
 				return this.apiFetch("/api/search/issues/", {
@@ -102,7 +102,7 @@ export class MyMCP extends McpAgent<Env, Record<string, never>, Props> {
 		// 4. Get publication
 		this.server.tool(
 			"get_publication",
-			"Look up full metadata for a newsletter by its Reletter slug, e.g. 'doomberg'. Includes subscribers, engagement, social, contributors, recent issues, rankings.",
+			"Look up full metadata for a newsletter by its Reletter slug, e.g. 'doomberg'. Includes subscribers, engagement, social, contributors, recent issues, rankings, and SEO reach (Google search keywords and estimated traffic).",
 			{
 				publication_id: z.string().describe("The Reletter publication ID, e.g. 'doomberg'."),
 			},
