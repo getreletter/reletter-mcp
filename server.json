@@ -1,0 +1,18 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "com.reletter/reletter",
+  "title": "Reletter",
+  "description": "Search and analyze 7M+ newsletters, issues, contacts, and chart rankings from Reletter.",
+  "version": "0.1.0",
+  "websiteUrl": "https://reletter.com",
+  "repository": {
+    "url": "https://github.com/getreletter/reletter-mcp",
+    "source": "github"
+  },
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://mcp.reletter.com"
+    }
+  ]
+}
