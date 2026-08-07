@@ -157,17 +157,7 @@ export function registerReletterTools(server: McpServer, apiFetch: ApiFetch) {
 		},
 	);
 
-	// 11. Stats
-	server.tool(
-		"index_stats",
-		"Global Reletter index stats: total publications, issues, etc.",
-		{},
-		async () => {
-			return apiFetch("/api/misc/stats/");
-		},
-	);
-
-	// 12. API quota
+	// 11. API quota
 	server.tool(
 		"api_quota",
 		"Check your API request quota and usage for the current month.",

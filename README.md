@@ -25,7 +25,6 @@ This is a remote Model Context Protocol (MCP) server that connects AI assistants
 - **chart_categories** — Available chart platforms and categories
 - **chart_rankings** — Latest chart rankings for a platform / category
 - **list_languages** — Reference list of languages
-- **index_stats** — Global Reletter index stats
 - **api_quota** — Your API request quota and usage for the month
 
 ## Setup
