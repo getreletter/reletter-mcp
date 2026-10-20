@@ -24,7 +24,10 @@ export class MyMCP extends McpAgent<Env, Record<string, never>, Props> {
 			}
 		}
 		const resp = await fetch(url.toString(), {
-			headers: { "x-reletter-api-key": this.props!.apiKey },
+			headers: {
+				"x-reletter-api-key": this.props!.apiKey,
+				"x-origin-auth": this.env.ORIGIN_SECRET,
+			},
 		});
 		if (!resp.ok) {
 			const text = await resp.text();

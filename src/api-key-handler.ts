@@ -109,7 +109,10 @@ app.post("/submit-api-key", async (c) => {
     const quotaResp = await fetch(
       "https://api.reletter.com/api/accounts/quota/",
       {
-        headers: { "x-reletter-api-key": apiKey.trim() },
+        headers: {
+          "x-reletter-api-key": apiKey.trim(),
+          "x-origin-auth": c.env.ORIGIN_SECRET,
+        },
       },
     );
     if (!quotaResp.ok) {
